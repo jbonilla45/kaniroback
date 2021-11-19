@@ -12,6 +12,7 @@ app.use(express.json())
 //LISTA RUTAS BASE
 
 app.use('/api/compras', require('./routes/compras-routes'));
+app.use('/api/productos', require('./routes/productos-routes'));
 
 //Arranque
 app.listen(app.get('port'), ()=> {
