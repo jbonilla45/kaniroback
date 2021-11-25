@@ -2,37 +2,62 @@ const coleccionCostos = require('../schemas/costos-schema');
 const operaciones = {};
 
 operaciones.getCostos = async function(req, res) {
-	const datos = await coleccionCostos.find()
-	res.json(datos);
+	try{
+		const costos = await coleccionCostos.find()
+		if (costos != null) {
+            res.status(200).json(costos);
+        } else {
+            res.status(404).json({ message: "Not found" })
+        }
+	}catch(err){
+		res.status(400).json({ message: "Bad request" })
+	}
 }
 
 operaciones.getCosto = async function(req, res) {
-	const dato = await coleccionCostos.findById(req.params.id);
-	res.json(dato);
+	try {
+        const costo = await coleccionCostos.findById(req.params.id);
+        if (costo != null) {
+            res.status(200).json(costo);
+        } else {
+            res.status(404).json({ message: "Not found" })
+        }
+    } catch (err) {
+        res.status(400).json({ message: "Bad request" })
+    }
 }
 
 operaciones.crearCosto = async function(req, res) {
-	const costo = new coleccionCostos(req.body);
-	console.log(costo);
-	await costo.save();
-	res.json({"status":"Dato de costo guardado"});	
+	try {
+        const costo = new coleccionCostos(req.body);
+        await costo.save();
+        res.status(201).json(costo);
+    } catch (err) {
+        res.status(400).json({ message: "Bad request" })
+    }	
 }
 
 operaciones.actualizarCosto = async function(req, res) {
-	const { id } = req.params;
-	const costo = {
-		descripcion: req.body.descripcion,
-    	valor: req.body.valor,
-    	categoria: req.body.categoria
-	}
-	console.log(costo)
-	await coleccionCostos.findByIdAndUpdate(req.params.id, {$set: costo}, {new: true});
-	res.json({"status":"Dato de costo actualizado"});
+	try {
+        const costo = {
+			descripcion: req.body.descripcion,
+			valor: req.body.valor,
+			categoria: req.body.categoria
+		}
+        await coleccionCostos.findByIdAndUpdate(req.params.id, { $set: costo }, { new: true });
+        res.status(200).json(costo);
+    } catch (err) {
+        res.status(400).json({ message: "Bad request" })
+    }
 }
 
 operaciones.borrarCosto = async function(req, res) {
-	await coleccionCostos.findByIdAndRemove(req.params.id);
-	res.json({"status":"Dato de costo borrado"});	
+	try {
+        await coleccionCostos.findByIdAndRemove(req.params.id);
+        res.status(200).json({ "status": "Dato de costo borrado" });
+    } catch (err) {
+        res.status(400).json({ message: "Bad request" })
+    }	
 
 }
 
