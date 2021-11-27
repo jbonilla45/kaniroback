@@ -15,11 +15,14 @@ const ComprasSchema = new Schema({
         type:Number,
         required:true
     },
+    cantidad:{
+        type:Number,
+        required:true
+    },
     categoria:{
         type:String,
         required:true
     }
-    
 })
 
 module.exports= mongoose.model('Compras', ComprasSchema);
