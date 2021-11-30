@@ -1,7 +1,7 @@
 const coleccionProductos = require('../schemas/productos-schema');
 const operaciones = {};
 
-operaciones.getProductos = async function(req, res) {
+operaciones.getProductos = async function (req, res) {
     try {
         const productos = await coleccionProductos.find(req.query)
         if (productos != null) {
@@ -14,7 +14,7 @@ operaciones.getProductos = async function(req, res) {
     }
 }
 
-operaciones.getProducto = async function(req, res) {
+operaciones.getProducto = async function (req, res) {
     try {
         const producto = await coleccionProductos.findById(req.params.id);
         if (producto != null) {
@@ -27,7 +27,7 @@ operaciones.getProducto = async function(req, res) {
     }
 }
 
-operaciones.crearProducto = async function(req, res) {
+operaciones.crearProducto = async function (req, res) {
     try {
         const producto = new coleccionProductos(req.body);
         await producto.save();
@@ -35,15 +35,17 @@ operaciones.crearProducto = async function(req, res) {
     } catch (err) {
         res.status(400).json({ message: "Bad request" })
     }
-
 }
 
-operaciones.actualizarProducto = async function(req, res) {
+operaciones.actualizarProducto = async function (req, res) {
     try {
         const producto = {
-            codigoProducto: req.body.codigoProducto,
-            costoUnitario: req.body.costoUnitario,
-            descripcion: req.body.descripcion
+            nombre: req.body.nombre,
+            categoria: req.body.categoria,
+            cantidad: req.body.cantidad,
+            descripcion: req.body.descripcion,
+            precioUnitario: req.body.precioUnitario,
+            precioTotal: req.body.precioTotal
         }
         await coleccionProductos.findByIdAndUpdate(req.params.id, { $set: producto }, { new: true });
         res.status(200).json(producto);
@@ -54,7 +56,7 @@ operaciones.actualizarProducto = async function(req, res) {
 
 }
 
-operaciones.borrarProducto = async function(req, res) {
+operaciones.borrarProducto = async function (req, res) {
     try {
         await coleccionProductos.findByIdAndRemove(req.params.id);
         res.status(200).json({ "status": "Dato de Producto borrado" });

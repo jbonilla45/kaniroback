@@ -3,11 +3,11 @@ const { Schema } = mongoose;
 
 const ProductosSchema = new Schema({
 
-    nombreProducto: {
+    nombre: {
         type: String,
         required: true
     },
-    tipo: {
+    categoria: {
         type: String,
         required: true
     },
