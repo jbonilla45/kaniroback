@@ -4,7 +4,8 @@
   "description": "backend proyecto kaniro",
   "main": "index.js",
   "scripts": {
-    "dbserver": "nodemon index.js"
+    "dbserver": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "kaniro",
   "license": "ISC",
