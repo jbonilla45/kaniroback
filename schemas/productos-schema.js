@@ -3,16 +3,24 @@ const { Schema } = mongoose;
 
 const ProductosSchema = new Schema({
 
-    codigoProducto: {
+    nombreProducto: {
         type: String,
         required: true
     },
-    costoUnitario: {
+    tipo: {
+        type: String,
+        required: true
+    },
+    cantidad: {
         type: Number,
         required: true
     },
     descripcion: {
         type: String,
+        required: true
+    },
+    precioUnitario: {
+        type: Number,
         required: true
     },
 })

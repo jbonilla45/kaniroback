@@ -16,6 +16,7 @@ app.use(cors())
 app.use('/api/compras', require('./routes/compras-routes'));
 app.use('/api/productos', require('./routes/productos-routes'));
 app.use('/api/ventas', require('./routes/ventas-routes'));
+app.use('/api/costos', require('./routes/costos-routes'));
 
 //Arranque
 app.listen(app.get('port'), ()=> {
