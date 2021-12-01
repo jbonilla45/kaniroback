@@ -42,8 +42,8 @@ operaciones.actualizarCompra = async function(req, res) {
         const compra = {
             descripcion: req.body.descripcion,
             valor: req.body.valor,
-            categoria: req.body.categoria,
-            cantidad:req.body.cantidad
+            cantidad:req.body.cantidad,
+            categoria: req.body.categoria
         }
         await coleccionCompras.findByIdAndUpdate(req.params.id, { $set: compra }, { new: true });
         res.status(200).json(compra);

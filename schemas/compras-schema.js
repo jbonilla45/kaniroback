@@ -22,6 +22,10 @@ const ComprasSchema = new Schema({
     categoria:{
         type:String,
         required:true
+    },
+    cantidad:{
+        type:Number,
+        required:true
     }
 })
 
