@@ -38,6 +38,7 @@ operaciones.crearCompra = async function(req, res) {
 }
 
 operaciones.actualizarCompra = async function(req, res) {
+<<<<<<< HEAD
     try {
         const compra = {
             descripcion: req.body.descripcion,
@@ -50,6 +51,18 @@ operaciones.actualizarCompra = async function(req, res) {
     } catch (err) {
         res.status(400).json({ message: "Bad request" })
     }
+=======
+	const { id } = req.params;
+	const compra = {
+		descripcion: req.body.descripcion,
+    	valor: req.body.valor,
+    	categoria: req.body.categoria,
+		cantidad: req.body.cantidad
+	}
+	console.log(compra)
+	await coleccionCompras.findByIdAndUpdate(req.params.id, {$set: compra}, {new: true});
+	res.json({"status":"Dato de compra actualizado"});
+>>>>>>> 56245e14b599df8996465eb293b08d427285e1f1
 }
 
 operaciones.borrarCompra = async function(req, res) {
