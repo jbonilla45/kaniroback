@@ -30,8 +30,8 @@ operaciones.getVenta = async function(req, res) {
     }
 }
 
-operaciones.crearVenta = async function(req, res) {
-	try {
+operaciones.crearVenta = async function (req, res) {
+    try {
         const venta = new coleccionVentas(req.body);
         await venta.save();
         res.status(201).json(venta);
